@@ -5,3 +5,4 @@ for the ECMWF MOOC of 2023 on Machine Learning in Weather & Climate.
 It explains how data assimilation and machine learning can be combined to model discovery or model error correction.
 
 See https://lms.ecmwf.int/ for the full event.
+
