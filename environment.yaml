@@ -1,0 +1,14 @@
+name: mooc
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - seaborn
+  - tqdm
+  - jupyterlab
+  - ca-certificates
+  - certifi
+  - openssl
+  - ipywidgets
+prefix: /Users/farchia/usr/mambaforge/envs/mooc

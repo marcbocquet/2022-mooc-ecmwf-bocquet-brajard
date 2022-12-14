@@ -21,6 +21,7 @@ import scipy.interpolate
 import random, time
 import enkf_analysis as analysis
 
+from tqdm.auto import tqdm
 
 def call(models, params, dir):
 
@@ -56,7 +57,7 @@ def call(models, params, dir):
     # Exception flag
     ef = True
     # Verbose?
-    vb = True
+    vb = False
     # Inflation relaxation
     ir = False
 
@@ -66,51 +67,65 @@ def call(models, params, dir):
     
     tpr_beg = time.process_time()
     twc_beg = time.perf_counter()
+    
+    with tqdm(total=Nt, desc='running EnKF') as progress:
+        for t in range(Nt):
 
-    for t in range(Nt):
+            # Get the obsevration vector at time t
+            y = yp[t]
 
-        # Get the obsevration vector at time t
-        y = yp[t]
+            if ir:
+                inflx = 1.+(inflx-1)*0.9999
 
-        if ir:
-            inflx = 1.+(inflx-1)*0.9999
+            if vb:
+                print(' - step', t, ' rmse (%3.3f)'%rmse_mean, ' spreadx (%3.3f)'%spread_mean, \
+                      ' rmsei (%3.3f)'%rmsei_mean,
+                      ' infl (%3.3f)'%infl, 'beta (%3.3f)'%beta, 'nu', nu)
+
+            try:
+
+                analysis.Inflation(E, infl)
+                xa[t], zeta[t], beta, nu = analysis.Analysis3(t, E, model, H, y, sig_obs, beta, nu)
+
+            except:
+                print('exception_raised')
+                ef = False
+                break
+
+            if t>=Nts:
+
+                # Compute instant rmse and spread
+                rmse[t] = np.sqrt(np.mean((xa[t]-xt[t])**2))
+                X = E - xa[t]
+                spread[t] = np.linalg.norm(X)/np.sqrt(Ne*Nx)
+                rmse_mean += (rmse[t]-rmse_mean)/(t-Nts+1)
+                zeta_mean += (zeta[t]-zeta_mean)/(t-Nts+1)
+                spread_mean += (spread[t]-spread_mean)/(t-Nts+1)
+
+                # Compute score of the interpolation solution
+                _x =  H.h[t%2]
+                _x = np.append(_x, _x[0]+Nx)
+                _y = np.append(y, y[0])
+                f = scipy.interpolate.CubicSpline(_x, _y, bc_type='periodic')
+                xi = f(np.array(range(Nx)))
+                rmsei[t] = np.sqrt(np.mean((xi-xt[t])**2))
+                rmsei_mean += (rmsei[t]-rmsei_mean)/(t-Nts+1)
+
+            E += model(E)
+            analysis.sqrt_core(E, sig_q)
             
-        if vb:
-            print(' - step', t, ' rmse (%3.3f)'%rmse_mean, ' spreadx (%3.3f)'%spread_mean, \
-                  ' rmsei (%3.3f)'%rmsei_mean,
-                  ' infl (%3.3f)'%infl, 'beta (%3.3f)'%beta, 'nu', nu)
-
-        try:
-
-            analysis.Inflation(E, infl)
-            xa[t], zeta[t], beta, nu = analysis.Analysis3(t, E, model, H, y, sig_obs, beta, nu)
-            
-        except:
-            print('exception_raised')
-            ef = False
-            break
-            
-        if t>=Nts:
-
-            # Compute instant rmse and spread
-            rmse[t] = np.sqrt(np.mean((xa[t]-xt[t])**2))
-            X = E - xa[t]
-            spread[t] = np.linalg.norm(X)/np.sqrt(Ne*Nx)
-            rmse_mean += (rmse[t]-rmse_mean)/(t-Nts+1)
-            zeta_mean += (zeta[t]-zeta_mean)/(t-Nts+1)
-            spread_mean += (spread[t]-spread_mean)/(t-Nts+1)
-
-            # Compute score of the interpolation solution
-            _x =  H.h[t%2]
-            _x = np.append(_x, _x[0]+Nx)
-            _y = np.append(y, y[0])
-            f = scipy.interpolate.CubicSpline(_x, _y, bc_type='periodic')
-            xi = f(np.array(range(Nx)))
-            rmsei[t] = np.sqrt(np.mean((xi-xt[t])**2))
-            rmsei_mean += (rmsei[t]-rmsei_mean)/(t-Nts+1)
- 
-        E += model(E)
-        analysis.sqrt_core(E, sig_q)
+            progress.set_postfix_str(
+                'rmse={rmse:3.3f} spreadx={spreadx:3.3f} rmsei={rmsei:3.3f} infl={infl:3.3f} beta={beta:3.3f} nu={nu:3.3f}'.format(
+                    rmse=rmse_mean,
+                    spreadx=spread_mean,
+                    rmsei=rmsei_mean,
+                    infl=infl,
+                    beta=beta,
+                    nu=nu,
+                ),
+                refresh=False,
+            )
+            progress.update()
   
 
     tpr_end = time.process_time()
@@ -122,7 +137,7 @@ def call(models, params, dir):
 
     # Save the analysis trajectory
 
-    with open(dir['output']+'/xa.npy', 'wb') as file:
+    with open(dir['output']/'xa.npy', 'wb') as file:
         np.save(file, xa)
 
     if ef:
