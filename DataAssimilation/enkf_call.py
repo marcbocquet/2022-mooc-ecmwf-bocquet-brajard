@@ -37,7 +37,10 @@ def call(models, params, dir):
 
     # Record of the analysis 
     xa = np.empty((Nt,Nx), dtype=np.float32)
-          
+    
+    # Record of the forecast
+    xf = np.empty((Nt,Nx), dtype=np.float32)
+    
     # Records for statistics
     spread = np.zeros(Nt)
     spread_mean =  0.
@@ -83,7 +86,7 @@ def call(models, params, dir):
                       ' infl (%3.3f)'%infl, 'beta (%3.3f)'%beta, 'nu', nu)
 
             try:
-
+                xf[t] = E.mean(axis=0)
                 analysis.Inflation(E, infl)
                 xa[t], zeta[t], beta, nu = analysis.Analysis3(t, E, model, H, y, sig_obs, beta, nu)
 
@@ -140,6 +143,11 @@ def call(models, params, dir):
     with open(dir['output']/'xa.npy', 'wb') as file:
         np.save(file, xa)
 
+        
+    # Save the forecast
+    with open(dir['output']/'xf.npy','wb') as file:
+        np.save(file, xf)
+        
     if ef:
         return rmse_mean, spread_mean, rmsei_mean, zeta_mean, wctime, prtime
     else:
