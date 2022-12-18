@@ -7,8 +7,9 @@ dependencies:
   - seaborn
   - tqdm
   - jupyterlab
+  - tensorflow  
   - ca-certificates
   - certifi
   - openssl
   - ipywidgets
-prefix: /Users/farchia/usr/mambaforge/envs/mooc
+  - scikit-learn
