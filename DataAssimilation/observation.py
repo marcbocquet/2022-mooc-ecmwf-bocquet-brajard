@@ -2,9 +2,9 @@
      Copyright (c) Marc Bocquet <marc.bocquet@enpc.fr>
      "observation.py"
      Original version: 08/12/2022
-     For the ECMWF MOOC: 09/12/2022
+     For the ECMWF MOOC: 19/12/2022
 
-     Checkerboard observation operator in the (Ot,Ox) space
+     Checkerboard and identity observation operator in the (Ot,Ox) space
 
 """
 
@@ -30,3 +30,18 @@ class checkerboard():
 
     def __call__(self, x, t):
         return x[..., self.h[t%2]]
+
+class identity():
+
+    """
+    Identity observation operator
+    """
+    
+    def __init__ (self, Nx, **kwargs):
+        super(identity, self).__init__(**kwargs)
+        
+        self.Ny = [ Nx ]
+        self.h = [ np.array([i for i in range(self.Ny[0])]) ]
+        
+    def __call__(self, x, t):
+        return x
