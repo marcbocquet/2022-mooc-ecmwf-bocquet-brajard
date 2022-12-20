@@ -1,0 +1,2 @@
+Slide show of the introduction:
+> jupyter nbconvert mooc_ecmwf_bocquet_brajard_part1.ipynb --to slides --post serve
