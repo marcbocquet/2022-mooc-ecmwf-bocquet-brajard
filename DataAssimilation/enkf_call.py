@@ -4,7 +4,7 @@
      "enkf_call.py"
 
      Original version: 03/03/2020-20/10/2020
-     Adaptation for the ECMWF MOOC: 08/12/2022-11/12/2022
+     Adaptation for the ECMWF MOOC: 08/12/2022-20/12/2022
 
      Code originally used in the paper:
      M. Bocquet, A. Farchi, and Q. Malartic.
@@ -137,19 +137,15 @@ def call(models, params, dir):
     wctime = twc_end-twc_beg
     prtime = tpr_end-tpr_beg
 
-
-    # Save the analysis trajectory
-
-    with open(dir['output']/'xa.npy', 'wb') as file:
-        np.save(file, xa)
-
-        
-    # Save the forecast
-    with open(dir['output']/'xf.npy','wb') as file:
-        np.save(file, xf)
+    # # Save the analysis trajectory
+    # with open(dir['output']/'xa.npy', 'wb') as file:
+    #     np.save(file, xa)
+    # # Save the forecast
+    # with open(dir['output']/'xf.npy','wb') as file:
+    #     np.save(file, xf)
         
     if ef:
-        return rmse_mean, spread_mean, rmsei_mean, zeta_mean, wctime, prtime
+        return xa, rmse_mean, spread_mean, rmsei_mean, zeta_mean, wctime, prtime
     else:
         nan =  float('inf')
-        return nan, nan, nan, wctime, prtime
+        return xa, nan, nan, nan, wctime, prtime

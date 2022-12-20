@@ -3,3 +3,5 @@
 __pycache__
 Output
 Figures/scatter*
+Figures/learning_curve.png
+Figures/rmse_damodel.png
