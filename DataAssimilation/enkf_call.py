@@ -23,7 +23,7 @@ import enkf_analysis as analysis
 
 from tqdm.auto import tqdm
 
-def call(models, params, dir):
+def call(models, params):
 
     model, xt, H, yp, dates = models
     Nx, Dt, Nt, Nts, Ne, sig_obs, sig_x, sig_q, infl = params
