@@ -3,7 +3,7 @@
      Copyright (c) Marc Bocquet <marc.bocquet@enpc.fr>
      "lyapunov_fd.py"
      Original version: 30/10/2019
-     Adaptation for the ECMWF MOOC: 11/12/2022
+     Adaptation for the ECMWF MOOC: 20/12/2022
 
      Computation of Lyapunov spectrum using finite differences
 
@@ -22,13 +22,13 @@ from lorenz96 import l96
 Nx = 40
 dt = 0.05
 
-# F = 8.5
-# diffusion = 0.01
-# friction = 1.1
-# model = l96cb(Nx, dt, F, diffusion, friction)
+F = 8.5
+diffusion = 0.025
+friction = 1.01
+model = l96cb(Nx, dt, F, diffusion, friction)
 
-F = 8.
-model = l96(Nx, dt, F)
+# F = 8.
+# model = l96(Nx, dt, F)
 
 
 # Number of tangent perturbations
@@ -79,13 +79,13 @@ for niter in range(Niter):
     print(niter,"/", Niter,  L/dt)
 
 
-
 tpr_end = time.process_time()
 twc_end = time.perf_counter()
 
 wctime = twc_end-twc_beg
 prtime = tpr_end-tpr_beg
 print("> wctime(s)", wctime, " prtime(s)", prtime)
+
 
 lyapunov_file = open('Post/lyapunov_'+model.tag+'.dat', 'w')
 lyapunov_file.write('tag '+model.tag+' Niter '+str(Niter)+'\n')
