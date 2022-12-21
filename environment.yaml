@@ -13,3 +13,4 @@ dependencies:
   - openssl
   - ipywidgets
   - scikit-learn
+  - pydot
