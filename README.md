@@ -8,3 +8,8 @@ It consists of an introduction, easily convertible into preliminary slides, and 
 
 See https://lms.ecmwf.int/ for the full ECMWF event.
 
+## Run the notebooks on you machine
+1. Create the conda enviromment: ```conda env create -f environment.yml```
+2. Activagte the enviromnment: ```conda activate mooc```
+3. Run jupyter lab: ```jupyter lab```
+4. Run the notebooks from the first (part 1) to the last (part 3)
