@@ -8,6 +8,17 @@ It consists of an introduction, easily convertible into preliminary slides, and 
 
 See https://lms.ecmwf.int/ for the full ECMWF event.
 
+## Before running the notebook
+Have a look at the introductory part
+
+<https://github.com/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_intro.ipynb>
+
+## Run the notebooks on google colab
+Just run each notebook starting with the part 1:
+- Part 1 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) ](https://colab.research.google.com/github/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_part1.ipynb)
+- Part 2 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) ](https://colab.research.google.com/github/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_part2.ipynb)
+- Part 3 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) ](https://colab.research.google.com/github/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_part3.ipynb)
+
 ## Run the notebooks on you machine
 1. Create the conda enviromment: ```conda env create -f environment.yml```
 2. Activagte the enviromnment: ```conda activate mooc```
