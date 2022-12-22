@@ -9,9 +9,12 @@ It consists of an introduction, easily convertible into preliminary slides, and 
 See https://lms.ecmwf.int/ for the full ECMWF event.
 
 ## Before running the notebook
-Have a look at the introductory part
+Have a look at the introductory part. For that, you to install the jupyter addon rise https://rise.readthedocs.io/ via pip install rise in your conda mooc environment.
+Run the introductory notebook:
+- Part Intro [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) ](https://colab.research.google.com/github/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_intro.ipynb)
+and then activate the rise slideshow mode.
 
-<https://github.com/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_intro.ipynb>
+It can also be displayed from its html output: ???
 
 ## Run the notebooks on google colab
 Just run each notebook starting with the part 1:

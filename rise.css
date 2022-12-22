@@ -2,14 +2,14 @@
     width:70% !important;
 }
 div#notebook p, div#notebook{
-    font-size: 115%;
-    line-height: 135%;
+    font-size: 80%;
+    line-height: 100%;
 }
 .rendered_html pre, .rendered_html table{
-    font-size:115%;
-    line-height: 135%;
+    font-size:100%;
+    line-height: 100%;
 }
 .CodeMirror, .CodeMirror pre, .CodeMirror-dialog, .CodeMirror-dialog .CodeMirror-search-field, .terminal-app .terminal {
     font-size: 100%;
-    line-height: 125%;
+    line-height: 100%;
 }
