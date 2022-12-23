@@ -17,8 +17,7 @@ Run the introductory notebook:
 and then activate the rise slideshow mode.
 
 #### It can also be displayed as a pdf file:
-https://github.com/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/mooc_ecmwf_bocquet_brajard_intro.pdf
-
+https://github.com/marcbocquet/2022-mooc-ecmwf-bocquet-brajard/blob/main/mooc_ecmwf_bocquet_brajard_intro.pdf
 
 ## Run the notebooks on google colab
 Just run each notebook starting with the part 1:
