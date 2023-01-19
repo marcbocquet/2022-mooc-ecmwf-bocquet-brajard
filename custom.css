@@ -13,3 +13,8 @@ div#notebook p, div#notebook{
     font-size: 100%;
     line-height: 125%;
 }
+
+img[alt="schematic"] { 
+        width:  1000px; 
+        display: block;
+      }
