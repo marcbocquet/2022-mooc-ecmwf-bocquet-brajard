@@ -3,7 +3,7 @@
 __pycache__
 Output
 Dump
-Figures/scatter*
-Figures/learning_curve.png
-Figures/rmse_damodel.png
+figures/scatter*
+figures/learning_curve.png
+figures/rmse_damodel.png
 Latex

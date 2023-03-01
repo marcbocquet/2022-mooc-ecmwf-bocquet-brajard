@@ -15,7 +15,7 @@
 """
 
 import sys
-sys.path.append('../Model')
+sys.path.append('../model')
 
 import numpy as np
 import random, time

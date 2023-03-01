@@ -11,7 +11,7 @@
 
 import numpy as np
 
-path = './LyapunovSpectrum/Post/'
+path = './lyapunov_spectrum/Post/'
 def load(file_name):
     with open(path+file_name, encoding='utf8') as file:
         spectrum = file.readlines()

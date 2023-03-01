@@ -14,7 +14,7 @@
 
 """
 import sys
-sys.path.append('./DataAssimilation')
+sys.path.append('./data_assimilation')
 
 import numpy as np
 import scipy.interpolate
